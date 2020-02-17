@@ -1,0 +1,40 @@
+# Dockerfile.rails
+
+FROM ruby:2.7
+MAINTAINER yadong@gmail.com
+
+ARG USER_ID
+ARG GROUP_ID
+
+RUN addgroup --gid $GROUP_ID user
+RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
+
+ENV INSTALL_PATH /opt/app
+RUN mkdir -p $INSTALL_PATH
+
+RUN apt-get update
+RUN apt-get install -y nodejs
+RUN gem install sqlite3 -v '1.4.1'
+RUN gem install puma -v '4.1'
+RUN gem install sass-rails -v '>= 6'
+RUN gem install webpacker -v '~> 4.0'
+RUN gem install turbolinks -v '~> 5'
+RUN gem install jbuilder -v '~> 2.7'
+RUN gem install redis -v '~> 4.0'
+RUN gem install bcrypt -v '~> 3.1.7'
+RUN gem install image_processing -v '~> 1.2'
+RUN gem install bootsnap -v '>= 1.4.2'
+RUN gem install byebug
+RUN gem install web-console -v '>= 3.3.0'
+RUN gem install listen -v '3.0.5'
+RUN gem install spring
+RUN gem install spring-watcher-listen -v '~> 2.0.0'
+RUN gem install capybara -v '>= 2.15'
+RUN gem install selenium-webdriver
+RUN gem install webdrivers
+RUN gem install rails bundler
+RUN chown -R user:user /opt/app
+WORKDIR /opt/app
+
+USER $USER_ID
+CMD ["/bin/sh"]

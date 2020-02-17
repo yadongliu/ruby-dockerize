@@ -1,0 +1,5 @@
+gem 'puma', '~> 4.1'
+gem 'unicorn', '~> 5.5.2'
+gem 'pg', '~> 1.2.2'
+gem 'sidekiq', '~> 6.0.4'
+gem 'redis-rails', '~> 5.0.2'
